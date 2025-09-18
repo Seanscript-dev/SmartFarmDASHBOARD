@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmSmart Dashboard | SeanScript Development</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 24px;
+            color: #2ecc71;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2ecc71;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card-header h2 {
+            font-size: 18px;
+            color: #2c3e50;
+        }
+        
+        .card-header i {
+            font-size: 20px;
+            color: #7f8c8d;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .stat-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-box i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        .moisture i { color: #3498db; }
+        .temperature i { color: #e74c3c; }
+        .nutrients i { color: #f39c12; }
+        .health i { color: #2ecc71; }
+        
+        .alert {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background: #fff4e6;
+            border-left: 4px solid #ffa94d;
+        }
+        
+        .alert.critical {
+            background: #ffe6e6;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .alert i {
+            font-size: 20px;
+            margin-right: 15px;
+            color: #ffa94d;
+        }
+        
+        .alert.critical i {
+            color: #ff6b6b;
+        }
+        
+        .alert-content h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .alert-content p {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        .zone-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .zone {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .zone:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .zone h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .zone-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .status-normal {
+            background: #d5f5e3;
+            color: #27ae60;
+        }
+        
+        .status-warning {
+            background: #fdebd0;
+            color: #f39c12;
+        }
+        
+        .status-critical {
+            background: #fadbd8;
+            color: #e74c3c;
+        }
+        
+        .drone-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .control-group label {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        select, button {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background: white;
+            font-size: 16px;
+        }
+        
+        button {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        button:hover {
+            background: #27ae60;
+        }
+        
+        button.secondary {
+            background: #3498db;
+        }
+        
+        button.secondary:hover {
+            background: #2980b9;
+        }
+        
+        .drone-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #2ecc71;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats, .zone-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <h1>FarmSmart Dashboard</h1>
+            </div>
+            <div class="user-info">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" alt="User">
+                <span>John Farmer</span>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Field Overview</h2>
+                    <i class="fas fa-tractor"></i>
+                </div>
+                <div class="stats">
+                    <div class="stat-box moisture">
+                        <i class="fas fa-tint"></i>
+                        <div class="stat-value">68%</div>
+                        <div class="stat-label">Soil Moisture</div>
+                    </div>
+                    <div class="stat-box temperature">
+                        <i class="fas fa-thermometer-half"></i>
+                        <div class="stat-value">24°C</div>
+                        <div class="stat-label">Temperature</div>
+                    </div>
+                    <div class="stat-box nutrients">
+                        <i class="fas fa-flask"></i>
+                        <div class="stat-value">Optimal</div>
+                        <div class="stat-label">Nutrient Levels</div>
+                    </div>
+                    <div class="stat-box health">
+                        <i class="fas fa-heartbeat"></i>
+                        <div class="stat-value">92%</div>
+                        <div class="stat-label">Crop Health</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Alerts & Notifications</h2>
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="alert critical">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div class="alert-content">
+                        <h3>Pest Detected</h3>
+                        <p>Pest detected in Zone 2. Immediate action recommended.</p>
+                    </div>
+                </div>
+                <div class="alert">
+                    <i class="fas fa-tint-slash"></i>
+                    <div class="alert-content">
+                        <h3>Low Moisture</h3>
+                        <p>Low moisture detected in Zone 4. Irrigation needed.</p>
+                    </div>
+                </div>
+                <div class="alert">
+                    <i class="fas fa-cloud-sun"></i>
+                    <div class="alert-content">
+                        <h3>Weather Alert</h3>
+                        <p>High probability of rain in next 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Zone Status</h2>
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div class="zone-grid">
+                    <div class="zone">
+                        <h3>Zone 1</h3>
+                        <div class="zone-status status-normal">Optimal</div>
+                    </div>
+                    <div class="zone">
+                        <h3>Zone 2</h3>
+                        <div class="zone-status status-critical">Pest Alert</div>
+                    </div>
+                    <div class="zone">
+                        <h3>Zone 3</h3>
+                        <div class="zone-status status-normal">Optimal</div>
+                    </div>
+                    <div class="zone">
+                        <h3>Zone 4</h3>
+                        <div class="zone-status status-warning">Low Moisture</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Drone Control</h2>
+                    <i class="fas fa-drone"></i>
+                </div>
+                <div class="drone-controls">
+                    <div class="control-group">
+                        <label for="zone-select">Select Zone:</label>
+                        <select id="zone-select">
+                            <option value="1">Zone 1</option>
+                            <option value="2" selected>Zone 2 (Pest Alert)</option>
+                            <option value="3">Zone 3</option>
+                            <option value="4">Zone 4 (Low Moisture)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="action-select">Select Action:</label>
+                        <select id="action-select">
+                            <option value="spray">Spray Treatment</option>
+                            <option value="monitor">Monitor Only</option>
+                            <option value="irrigate">Irrigate</option>
+                        </select>
+                    </div>
+                    
+                    <button>
+                        <i class="fas fa-paper-plane"></i>
+                        Send Drone to Zone 2
+                    </button>
+                    
+                    <button class="secondary">
+                        <i class="fas fa-sync-alt"></i>
+                        Update Treatment Log
+                    </button>
+                    
+                    <div class="drone-status">
+                        <div class="status-indicator"></div>
+                        <span>Drone Status: Available</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Crop Health Visualization</h2>
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span>Zone 1: 95% Health</span>
+                            <span class="status-normal" style="padding: 3px 8px;">Optimal</span>
+                        </div>
+                        <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
+                            <div style="height: 100%; width: 95%; background: #2ecc71;"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span>Zone 2: 45% Health</span>
+                            <span class="status-critical" style="padding: 3px 8px;">Critical</span>
+                        </div>
+                        <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
+                            <div style="height: 100%; width: 45%; background: #e74c3c;"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span>Zone 3: 90% Health</span>
+                            <span class="status-normal" style="padding: 3px 8px;">Optimal</span>
+                        </div>
+                        <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
+                            <div style="height: 100%; width: 90%; background: #2ecc71;"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span>Zone 4: 65% Health</span>
+                            <span class="status-warning" style="padding: 3px 8px;">Warning</span>
+                        </div>
+                        <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
+                            <div style="height: 100%; width: 65%; background: #f39c12;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Blockchain Traceability</h2>
+                    <i class="fas fa-link"></i>
+                </div>
+                <div style="padding: 10px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee;">
+                        <span>Last Treatment Recorded:</span>
+                        <span style="font-weight: 500;">2 hours ago</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee;">
+                        <span>Blockchain Network:</span>
+                        <span style="font-weight: 500;">Ethereum Testnet</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px;">
+                        <span>Transactions:</span>
+                        <span style="font-weight: 500;">127 recorded</span>
+                    </div>
+                </div>
+                <button style="margin-top: 20px;">
+                    <i class="fas fa-search"></i>
+                    View Treatment History
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>FarmSmart Dashboard v2.1 | Developed by <a href="#">SeanScript Development</a> | Data refreshes every 5 minutes</p>
+        </div>
+    </div>
+
+    <script>
+        // Simple animation for status indicators
+        setInterval(() => {
+            const indicators = document.querySelectorAll('.stat-value');
+            indicators.forEach(indicator => {
+                if (indicator.classList.contains('pulse')) {
+                    indicator.classList.remove('pulse');
+                } else {
+                    indicator.classList.add('pulse');
+                }
+            });
+        }, 2000);
+    </script>
+</body>
+</html>
