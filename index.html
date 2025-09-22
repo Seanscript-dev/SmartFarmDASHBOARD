@@ -14,7 +14,8 @@
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('farmbg.png') no-repeat center center fixed;
+            background-size: cover;
             color: #333;
             min-height: 100vh;
         }
@@ -30,11 +31,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background: #2c3e50;
+            background: transparent;
             color: white;
             border-radius: 10px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            
+            
         }
         
         .logo {
@@ -74,11 +76,16 @@
         }
         
         .card {
-            background: white;
+            background: transparent;
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: transparent;
+            backdrop-filter: transparent;
+            transition: all 0.3s ease;
+            border-left: 4px transparent;
         }
+        
+        
         
         .card-header {
             display: flex;
@@ -86,17 +93,18 @@
             align-items: center;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #d5f5e3;
         }
         
         .card-header h2 {
             font-size: 18px;
-            color: #2c3e50;
+            color: #ffffff;
+            text-shadow: #27ae60;
         }
         
         .card-header i {
             font-size: 20px;
-            color: #7f8c8d;
+            color: 1px; #27ae60;
         }
         
         .stats {
@@ -106,21 +114,33 @@
         }
         
         .stat-box {
-            background: #f8f9fa;
+            background: rgba(248, 249, 250, 0.7);
             padding: 15px;
             border-radius: 8px;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            background: rgba(255, 255, 255, 0.871);
+            transform: scale(1.03);
         }
         
         .stat-box i {
             font-size: 24px;
             margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover i {
+            transform: scale(1.2);
         }
         
         .stat-value {
             font-size: 24px;
             font-weight: 700;
             margin: 5px 0;
+            transition: all 0.3s ease;
         }
         
         .stat-label {
@@ -139,8 +159,13 @@
             padding: 12px;
             margin-bottom: 15px;
             border-radius: 8px;
-            background: #fff4e6;
+            background: #ffe6e6;
             border-left: 4px solid #ffa94d;
+            transition: all 0.3s ease;
+        }
+        
+        .alert:hover {
+            transform: translateX(5px);
         }
         
         .alert.critical {
@@ -175,7 +200,7 @@
         }
         
         .zone {
-            background: #f8f9fa;
+            background: rgba(248, 249, 250, 0.7);
             padding: 15px;
             border-radius: 8px;
             text-align: center;
@@ -186,6 +211,7 @@
         .zone:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
         }
         
         .zone h3 {
@@ -199,6 +225,11 @@
             border-radius: 20px;
             font-size: 14px;
             font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .zone:hover .zone-status {
+            transform: scale(1.05);
         }
         
         .status-normal {
@@ -230,7 +261,7 @@
         
         .control-group label {
             font-weight: 500;
-            color: #2c3e50;
+            color: #e0e1e3;
         }
         
         select, button {
@@ -239,6 +270,13 @@
             border: 1px solid #ddd;
             background: white;
             font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #2ecc71;
+            box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
         }
         
         button {
@@ -255,6 +293,12 @@
         
         button:hover {
             background: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:active {
+            transform: translateY(0);
         }
         
         button.secondary {
@@ -270,9 +314,14 @@
             align-items: center;
             gap: 10px;
             padding: 15px;
-            background: #f8f9fa;
+            background: rgba(248, 249, 250, 0.7);
             border-radius: 8px;
             margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .drone-status:hover {
+            background: rgba(255, 255, 255, 0.9);
         }
         
         .status-indicator {
@@ -280,19 +329,46 @@
             height: 12px;
             border-radius: 50%;
             background: #2ecc71;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .health-bar {
+            background: #ffe6e6d7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .health-bar:hover {
+            background: #ffe6e6e9;
+            transform: translateY(-2px);
         }
         
         .footer {
             text-align: center;
             margin-top: 30px;
             padding: 20px;
-            color: #7f8c8d;
+            color: white;
             font-size: 14px;
+            border-radius: 10px;
         }
         
         .footer a {
-            color: #3498db;
+            color: #2ecc71;
             text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: #68f940;
+            text-decoration:  underline;
         }
         
         @media (max-width: 1024px) {
@@ -310,6 +386,8 @@
                 grid-template-columns: 1fr;
             }
         }
+       
+        
     </style>
 </head>
 <body>
@@ -411,7 +489,7 @@
             <div class="card">
                 <div class="card-header">
                     <h2>Drone Control</h2>
-                    <i class="fas fa-drone"></i>
+                     <i class="fas fa-cogs"></i>
                 </div>
                 <div class="drone-controls">
                     <div class="control-group">
@@ -455,44 +533,44 @@
                     <h2>Crop Health Visualization</h2>
                     <i class="fas fa-seedling"></i>
                 </div>
-                <div style="text-align: center; padding: 20px;">
-                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                <div>
+                    <div class="health-bar">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <span>Zone 1: 95% Health</span>
                             <span class="status-normal" style="padding: 3px 8px;">Optimal</span>
                         </div>
                         <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
-                            <div style="height: 100%; width: 95%; background: #2ecc71;"></div>
+                            <div style="height: 100%; width: 95%; background: #2ecc71; transition: width 0.5s ease;"></div>
                         </div>
                     </div>
                     
-                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                    <div class="health-bar">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <span>Zone 2: 45% Health</span>
                             <span class="status-critical" style="padding: 3px 8px;">Critical</span>
                         </div>
                         <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
-                            <div style="height: 100%; width: 45%; background: #e74c3c;"></div>
+                            <div style="height: 100%; width: 45%; background: #e74c3c; transition: width 0.5s ease;"></div>
                         </div>
                     </div>
                     
-                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                    <div class="health-bar">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <span>Zone 3: 90% Health</span>
                             <span class="status-normal" style="padding: 3px 8px;">Optimal</span>
                         </div>
                         <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
-                            <div style="height: 100%; width: 90%; background: #2ecc71;"></div>
+                            <div style="height: 100%; width: 90%; background: #2ecc71; transition: width 0.5s ease;"></div>
                         </div>
                     </div>
                     
-                    <div style="background: #f8f9fa; border-radius: 8px; padding: 15px;">
+                    <div class="health-bar">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <span>Zone 4: 65% Health</span>
                             <span class="status-warning" style="padding: 3px 8px;">Warning</span>
                         </div>
                         <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
-                            <div style="height: 100%; width: 65%; background: #f39c12;"></div>
+                            <div style="height: 100%; width: 65%; background: #f39c12; transition: width 0.5s ease;"></div>
                         </div>
                     </div>
                 </div>
@@ -504,15 +582,15 @@
                     <i class="fas fa-link"></i>
                 </div>
                 <div style="padding: 10px;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee;">
+                    <div style="display: flex; align-items: center; color:#ecf0f1; justify-content: space-between; padding: 12px; border-bottom: 1px solid #d5f5e3;">
                         <span>Last Treatment Recorded:</span>
                         <span style="font-weight: 500;">2 hours ago</span>
                     </div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; color:#ecf0f1; padding: 12px; border-bottom: 1px solid #d5f5e3;">
                         <span>Blockchain Network:</span>
                         <span style="font-weight: 500;">Ethereum Testnet</span>
                     </div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px;">
+                    <div style="display: flex; align-items: center;color:#ecf0f1; padding: 12px;justify-content: space-between;  border-bottom: 1px solid #d5f5e3;">
                         <span>Transactions:</span>
                         <span style="font-weight: 500;">127 recorded</span>
                     </div>
@@ -525,7 +603,7 @@
         </div>
         
         <div class="footer">
-            <p>FarmSmart Dashboard v2.1 | Developed by <a href="#">SeanScript Development</a> | Data refreshes every 5 minutes</p>
+            <p>FarmSmart Dashboard v2.1 | Developed by <a href="https://github.com/Seanscript-dev" target="_blank">SeanScript Development</a> | Data refreshes every 5 minutes</p>
         </div>
     </div>
 
@@ -541,8 +619,8 @@
                 }
             });
         }, 2000);
+        
+        
     </script>
 </body>
 </html>
-
-
