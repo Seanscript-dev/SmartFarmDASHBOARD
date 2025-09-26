@@ -18,6 +18,19 @@
             background-size: cover;
             color: #333;
             min-height: 100vh;
+            opacity: 0;
+            animation: pageLoad 1s ease-out forwards;
+        }
+
+        @keyframes pageLoad {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .container {
@@ -31,12 +44,24 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background: transparent;
+            background: rgba(0, 0, 0, 0.1);
             color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-bottom: 20px;
-            
-            
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideInFromTop 0.8s ease-out;
+        }
+
+        @keyframes slideInFromTop {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .logo {
@@ -48,6 +73,12 @@
         .logo i {
             font-size: 24px;
             color: #2ecc71;
+            animation: leafGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes leafGlow {
+            0%, 100% { text-shadow: 0 0 5px #2ecc71; }
+            50% { text-shadow: 0 0 20px #2ecc71, 0 0 30px #2ecc71; }
         }
         
         .logo h1 {
@@ -67,6 +98,13 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #2ecc71;
+            transition: all 0.3s ease;
+        }
+
+        .user-info img:hover {
+            transform: scale(1.1);
+            border-color: #27ae60;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
         }
         
         .main-content {
@@ -76,16 +114,36 @@
         }
         
         .card {
-            background: transparent;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
             padding: 20px;
-            box-shadow: transparent;
-            backdrop-filter: transparent;
-            transition: all 0.3s ease;
-            border-left: 4px transparent;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: cardAppear 0.8s ease-out forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(46, 204, 113, 0.3);
+        }
         
         .card-header {
             display: flex;
@@ -93,18 +151,23 @@
             align-items: center;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #d5f5e3;
+            border-bottom: 1px solid rgba(213, 245, 227, 0.3);
         }
         
         .card-header h2 {
             font-size: 18px;
             color: #ffffff;
-            text-shadow: #27ae60;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .card-header i {
             font-size: 20px;
-            color: 1px; #27ae60;
+            color: #27ae60;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-header i {
+            transform: rotate(10deg) scale(1.1);
         }
         
         .stats {
@@ -114,38 +177,44 @@
         }
         
         .stat-box {
-            background: rgba(248, 249, 250, 0.7);
+            background: rgba(248, 249, 250, 0.15);
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 12px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            cursor: pointer;
         }
         
         .stat-box:hover {
-            background: rgba(255, 255, 255, 0.871);
-            transform: scale(1.03);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
         .stat-box i {
-            font-size: 24px;
+            font-size: 28px;
             margin-bottom: 10px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         
         .stat-box:hover i {
-            transform: scale(1.2);
+            transform: scale(1.3) rotate(5deg);
         }
         
         .stat-value {
             font-size: 24px;
             font-weight: 700;
             margin: 5px 0;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
         
         .stat-label {
             font-size: 14px;
-            color: #7f8c8d;
+            color: rgba(255, 255, 255, 0.8);
         }
         
         .moisture i { color: #3498db; }
@@ -158,18 +227,21 @@
             align-items: center;
             padding: 12px;
             margin-bottom: 15px;
-            border-radius: 8px;
-            background: #ffe6e6;
+            border-radius: 12px;
+            background: rgba(255, 230, 230, 0.2);
             border-left: 4px solid #ffa94d;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(5px);
+            cursor: pointer;
         }
         
         .alert:hover {
-            transform: translateX(5px);
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .alert.critical {
-            background: #ffe6e6;
+            background: rgba(255, 230, 230, 0.3);
             border-left: 4px solid #ff6b6b;
         }
         
@@ -177,6 +249,11 @@
             font-size: 20px;
             margin-right: 15px;
             color: #ffa94d;
+            transition: transform 0.3s ease;
+        }
+
+        .alert:hover i {
+            transform: scale(1.2) rotate(10deg);
         }
         
         .alert.critical i {
@@ -186,11 +263,12 @@
         .alert-content h3 {
             font-size: 16px;
             margin-bottom: 5px;
+            color: white;
         }
         
         .alert-content p {
             font-size: 14px;
-            color: #7f8c8d;
+            color: rgba(255, 255, 255, 0.8);
         }
         
         .zone-grid {
@@ -200,51 +278,78 @@
         }
         
         .zone {
-            background: rgba(248, 249, 250, 0.7);
+            background: rgba(248, 249, 250, 0.15);
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 12px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .zone::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .zone:hover::before {
+            left: 100%;
         }
         
         .zone:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.25);
         }
         
         .zone h3 {
             font-size: 16px;
             margin-bottom: 10px;
+            color: white;
+            position: relative;
+            z-index: 1;
         }
         
         .zone-status {
             display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
+            padding: 8px 15px;
+            border-radius: 25px;
             font-size: 14px;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
         }
         
         .zone:hover .zone-status {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
         
         .status-normal {
-            background: #d5f5e3;
+            background: rgba(213, 245, 227, 0.9);
             color: #27ae60;
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
         }
         
         .status-warning {
-            background: #fdebd0;
+            background: rgba(253, 235, 208, 0.9);
             color: #f39c12;
+            box-shadow: 0 0 10px rgba(243, 156, 18, 0.3);
         }
         
         .status-critical {
-            background: #fadbd8;
+            background: rgba(250, 219, 216, 0.9);
             color: #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
         }
         
         .drone-controls {
@@ -261,52 +366,100 @@
         
         .control-group label {
             font-weight: 500;
-            color: #e0e1e3;
+            color: rgba(255, 255, 255, 0.9);
         }
         
         select, button {
             padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            background: white;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(40, 60, 40, 0.25); /* improved blending for select/button */
             font-size: 16px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+
+        select option {
+            background: #232e1f; /* dark background for dropdown options */
+            color: #fff;
         }
         
         select:focus {
             outline: none;
             border-color: #2ecc71;
-            box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.3);
+            background: rgba(46, 204, 113, 0.15); /* more visible on focus */
         }
         
         button {
-            background: #2ecc71;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
             color: white;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         button:hover {
-            background: #27ae60;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
         }
         
         button:active {
-            transform: translateY(0);
+            transform: translateY(-1px) scale(1.01);
         }
         
         button.secondary {
-            background: #3498db;
+            background: linear-gradient(135deg, #3498db, #2980b9);
         }
         
         button.secondary:hover {
-            background: #2980b9;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .drone-status {
@@ -314,14 +467,20 @@
             align-items: center;
             gap: 10px;
             padding: 15px;
-            background: rgba(248, 249, 250, 0.7);
-            border-radius: 8px;
+            background: rgba(248, 249, 250, 0.15);
+            border-radius: 12px;
             margin-top: 15px;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .drone-status:hover {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .drone-status span {
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .status-indicator {
@@ -330,34 +489,89 @@
             border-radius: 50%;
             background: #2ecc71;
             animation: pulse 2s infinite;
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
         }
         
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% { 
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.7;
+                transform: scale(1.1);
+            }
+            100% { 
+                opacity: 1;
+                transform: scale(1);
+            }
         }
         
         .health-bar {
-            background: #ffe6e6d7;
-            border-radius: 8px;
+            background: rgba(255, 230, 230, 0.15);
+            border-radius: 12px;
             padding: 15px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .health-bar:hover {
-            background: #ffe6e6e9;
+            background: rgba(255, 230, 230, 0.25);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .health-bar-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .health-progress {
+            height: 20px;
+            background: rgba(236, 240, 241, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .health-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .health-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
         
         .footer {
             text-align: center;
             margin-top: 30px;
             padding: 20px;
-            color: white;
+            color: rgba(255, 255, 255, 0.8);
             font-size: 14px;
-            border-radius: 10px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .footer a {
@@ -368,7 +582,89 @@
         
         .footer a:hover {
             color: #68f940;
-            text-decoration:  underline;
+            text-decoration: underline;
+            text-shadow: 0 0 10px #2ecc71;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            color: white;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #2ecc71;
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(46, 204, 113, 0.9);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.error {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        .toast.warning {
+            background: rgba(243, 156, 18, 0.9);
         }
         
         @media (max-width: 1024px) {
@@ -385,9 +681,31 @@
             .stats, .zone-grid {
                 grid-template-columns: 1fr;
             }
+
+            .card {
+                animation-delay: 0.1s;
+            }
         }
-       
-        
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(46, 204, 113, 0.5);
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(46, 204, 113, 0.8);
+        }
     </style>
 </head>
 <body>
@@ -410,22 +728,22 @@
                     <i class="fas fa-tractor"></i>
                 </div>
                 <div class="stats">
-                    <div class="stat-box moisture">
+                    <div class="stat-box moisture" onclick="showStatDetails('moisture')">
                         <i class="fas fa-tint"></i>
                         <div class="stat-value">68%</div>
                         <div class="stat-label">Soil Moisture</div>
                     </div>
-                    <div class="stat-box temperature">
+                    <div class="stat-box temperature" onclick="showStatDetails('temperature')">
                         <i class="fas fa-thermometer-half"></i>
                         <div class="stat-value">24°C</div>
                         <div class="stat-label">Temperature</div>
                     </div>
-                    <div class="stat-box nutrients">
+                    <div class="stat-box nutrients" onclick="showStatDetails('nutrients')">
                         <i class="fas fa-flask"></i>
                         <div class="stat-value">Optimal</div>
                         <div class="stat-label">Nutrient Levels</div>
                     </div>
-                    <div class="stat-box health">
+                    <div class="stat-box health" onclick="showStatDetails('health')">
                         <i class="fas fa-heartbeat"></i>
                         <div class="stat-value">92%</div>
                         <div class="stat-label">Crop Health</div>
@@ -438,21 +756,21 @@
                     <h2>Alerts & Notifications</h2>
                     <i class="fas fa-bell"></i>
                 </div>
-                <div class="alert critical">
+                <div class="alert critical" onclick="handleAlert('pest')">
                     <i class="fas fa-exclamation-circle"></i>
                     <div class="alert-content">
                         <h3>Pest Detected</h3>
                         <p>Pest detected in Zone 2. Immediate action recommended.</p>
                     </div>
                 </div>
-                <div class="alert">
+                <div class="alert" onclick="handleAlert('moisture')">
                     <i class="fas fa-tint-slash"></i>
                     <div class="alert-content">
                         <h3>Low Moisture</h3>
                         <p>Low moisture detected in Zone 4. Irrigation needed.</p>
                     </div>
                 </div>
-                <div class="alert">
+                <div class="alert" onclick="handleAlert('weather')">
                     <i class="fas fa-cloud-sun"></i>
                     <div class="alert-content">
                         <h3>Weather Alert</h3>
@@ -467,19 +785,19 @@
                     <i class="fas fa-map-marked-alt"></i>
                 </div>
                 <div class="zone-grid">
-                    <div class="zone">
+                    <div class="zone" onclick="selectZone(1)">
                         <h3>Zone 1</h3>
                         <div class="zone-status status-normal">Optimal</div>
                     </div>
-                    <div class="zone">
+                    <div class="zone" onclick="selectZone(2)">
                         <h3>Zone 2</h3>
                         <div class="zone-status status-critical">Pest Alert</div>
                     </div>
-                    <div class="zone">
+                    <div class="zone" onclick="selectZone(3)">
                         <h3>Zone 3</h3>
                         <div class="zone-status status-normal">Optimal</div>
                     </div>
-                    <div class="zone">
+                    <div class="zone" onclick="selectZone(4)">
                         <h3>Zone 4</h3>
                         <div class="zone-status status-warning">Low Moisture</div>
                     </div>
@@ -489,12 +807,12 @@
             <div class="card">
                 <div class="card-header">
                     <h2>Drone Control</h2>
-                     <i class="fas fa-cogs"></i>
+                    <i class="fas fa-cogs"></i>
                 </div>
                 <div class="drone-controls">
                     <div class="control-group">
                         <label for="zone-select">Select Zone:</label>
-                        <select id="zone-select">
+                        <select id="zone-select" onchange="updateDroneButton()">
                             <option value="1">Zone 1</option>
                             <option value="2" selected>Zone 2 (Pest Alert)</option>
                             <option value="3">Zone 3</option>
@@ -504,26 +822,26 @@
                     
                     <div class="control-group">
                         <label for="action-select">Select Action:</label>
-                        <select id="action-select">
+                        <select id="action-select" onchange="updateDroneButton()">
                             <option value="spray">Spray Treatment</option>
                             <option value="monitor">Monitor Only</option>
                             <option value="irrigate">Irrigate</option>
                         </select>
                     </div>
                     
-                    <button>
+                    <button id="drone-btn" onclick="sendDrone()">
                         <i class="fas fa-paper-plane"></i>
-                        Send Drone to Zone 2
+                        <span>Send Drone to Zone 2</span>
                     </button>
                     
-                    <button class="secondary">
+                    <button class="secondary" onclick="updateTreatmentLog()">
                         <i class="fas fa-sync-alt"></i>
                         Update Treatment Log
                     </button>
                     
                     <div class="drone-status">
                         <div class="status-indicator"></div>
-                        <span>Drone Status: Available</span>
+                        <span id="drone-status-text">Drone Status: Available</span>
                     </div>
                 </div>
             </div>
@@ -535,42 +853,42 @@
                 </div>
                 <div>
                     <div class="health-bar">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <div class="health-bar-info">
                             <span>Zone 1: 95% Health</span>
-                            <span class="status-normal" style="padding: 3px 8px;">Optimal</span>
+                            <span class="status-normal" style="padding: 3px 8px; border-radius: 15px;">Optimal</span>
                         </div>
-                        <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
-                            <div style="height: 100%; width: 95%; background: #2ecc71; transition: width 0.5s ease;"></div>
+                        <div class="health-progress">
+                            <div class="health-fill" style="width: 95%; background: #2ecc71;"></div>
                         </div>
                     </div>
                     
                     <div class="health-bar">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <div class="health-bar-info">
                             <span>Zone 2: 45% Health</span>
-                            <span class="status-critical" style="padding: 3px 8px;">Critical</span>
+                            <span class="status-critical" style="padding: 3px 8px; border-radius: 15px;">Critical</span>
                         </div>
-                        <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
-                            <div style="height: 100%; width: 45%; background: #e74c3c; transition: width 0.5s ease;"></div>
+                        <div class="health-progress">
+                            <div class="health-fill" style="width: 45%; background: #e74c3c;"></div>
                         </div>
                     </div>
                     
                     <div class="health-bar">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <div class="health-bar-info">
                             <span>Zone 3: 90% Health</span>
-                            <span class="status-normal" style="padding: 3px 8px;">Optimal</span>
+                            <span class="status-normal" style="padding: 3px 8px; border-radius: 15px;">Optimal</span>
                         </div>
-                        <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
-                            <div style="height: 100%; width: 90%; background: #2ecc71; transition: width 0.5s ease;"></div>
+                        <div class="health-progress">
+                            <div class="health-fill" style="width: 90%; background: #2ecc71;"></div>
                         </div>
                     </div>
                     
                     <div class="health-bar">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <div class="health-bar-info">
                             <span>Zone 4: 65% Health</span>
-                            <span class="status-warning" style="padding: 3px 8px;">Warning</span>
+                            <span class="status-warning" style="padding: 3px 8px; border-radius: 15px;">Warning</span>
                         </div>
-                        <div style="height: 20px; background: #ecf0f1; border-radius: 10px; overflow: hidden;">
-                            <div style="height: 100%; width: 65%; background: #f39c12; transition: width 0.5s ease;"></div>
+                        <div class="health-progress">
+                            <div class="health-fill" style="width: 65%; background: #f39c12;"></div>
                         </div>
                     </div>
                 </div>
@@ -582,20 +900,20 @@
                     <i class="fas fa-link"></i>
                 </div>
                 <div style="padding: 10px;">
-                    <div style="display: flex; align-items: center; color:#ecf0f1; justify-content: space-between; padding: 12px; border-bottom: 1px solid #d5f5e3;">
+                    <div style="display: flex; align-items: center; color: rgba(255, 255, 255, 0.9); justify-content: space-between; padding: 12px; border-bottom: 1px solid rgba(213, 245, 227, 0.3);">
                         <span>Last Treatment Recorded:</span>
                         <span style="font-weight: 500;">2 hours ago</span>
                     </div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; color:#ecf0f1; padding: 12px; border-bottom: 1px solid #d5f5e3;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; color: rgba(255, 255, 255, 0.9); padding: 12px; border-bottom: 1px solid rgba(213, 245, 227, 0.3);">
                         <span>Blockchain Network:</span>
                         <span style="font-weight: 500;">Ethereum Testnet</span>
                     </div>
-                    <div style="display: flex; align-items: center;color:#ecf0f1; padding: 12px;justify-content: space-between;  border-bottom: 1px solid #d5f5e3;">
+                    <div style="display: flex; align-items: center; color: rgba(255, 255, 255, 0.9); padding: 12px; justify-content: space-between; border-bottom: 1px solid rgba(213, 245, 227, 0.3);">
                         <span>Transactions:</span>
-                        <span style="font-weight: 500;">127 recorded</span>
+                        <span style="font-weight: 500;" id="transaction-count">127 recorded</span>
                     </div>
                 </div>
-                <button style="margin-top: 20px;">
+                <button style="margin-top: 20px;" onclick="viewTreatmentHistory()">
                     <i class="fas fa-search"></i>
                     View Treatment History
                 </button>
@@ -607,20 +925,378 @@
         </div>
     </div>
 
+    <!-- Modal for detailed information -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title">Details</h2>
+            <div id="modal-body">
+                <!-- Content will be dynamically inserted -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast">
+        <span id="toast-message"></span>
+    </div>
+
     <script>
-        // Simple animation for status indicators
-        setInterval(() => {
-            const indicators = document.querySelectorAll('.stat-value');
-            indicators.forEach(indicator => {
-                if (indicator.classList.contains('pulse')) {
-                    indicator.classList.remove('pulse');
-                } else {
-                    indicator.classList.add('pulse');
+        let droneStatus = 'available';
+        let currentMission = null;
+        
+        // Page load animations and smooth transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize real-time data updates
+            setInterval(updateRealTimeData, 30000); // Update every 30 seconds
+            
+            // Add smooth scrolling
+            document.documentElement.style.scrollBehavior = 'smooth';
+        });
+
+        // Show detailed statistics
+        function showStatDetails(type) {
+            const modal = document.getElementById('detailModal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            
+            const details = {
+                moisture: {
+                    title: 'Soil Moisture Analysis',
+                    content: `
+                        <div style="margin-bottom: 20px;">
+                            <h3 style="color: #3498db; margin-bottom: 10px;">Current Status: 68%</h3>
+                            <p style="margin-bottom: 15px;">Optimal range: 60-75%</p>
+                            <div style="background: rgba(52, 152, 219, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #3498db;">
+                                <strong>Recommendations:</strong><br>
+                                • Maintain current irrigation schedule<br>
+                                • Monitor Zone 4 for potential drought stress<br>
+                                • Consider mulching to retain moisture
+                            </div>
+                        </div>
+                    `
+                },
+                temperature: {
+                    title: 'Temperature Monitoring',
+                    content: `
+                        <div style="margin-bottom: 20px;">
+                            <h3 style="color: #e74c3c; margin-bottom: 10px;">Current: 24°C</h3>
+                            <p style="margin-bottom: 15px;">Optimal range: 22-26°C</p>
+                            <div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #e74c3c;">
+                                <strong>24-Hour Forecast:</strong><br>
+                                • Morning: 18°C<br>
+                                • Afternoon: 28°C<br>
+                                • Evening: 22°C
+                            </div>
+                        </div>
+                    `
+                },
+                nutrients: {
+                    title: 'Nutrient Analysis',
+                    content: `
+                        <div style="margin-bottom: 20px;">
+                            <h3 style="color: #f39c12; margin-bottom: 10px;">Status: Optimal</h3>
+                            <div style="background: rgba(243, 156, 18, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #f39c12;">
+                                <strong>Nutrient Levels:</strong><br>
+                                • Nitrogen (N): 85% optimal<br>
+                                • Phosphorus (P): 92% optimal<br>
+                                • Potassium (K): 88% optimal<br>
+                                • pH Level: 6.8 (ideal)
+                            </div>
+                        </div>
+                    `
+                },
+                health: {
+                    title: 'Crop Health Assessment',
+                    content: `
+                        <div style="margin-bottom: 20px;">
+                            <h3 style="color: #2ecc71; margin-bottom: 10px;">Overall Health: 92%</h3>
+                            <div style="background: rgba(46, 204, 113, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #2ecc71;">
+                                <strong>Health Indicators:</strong><br>
+                                • Leaf color: Excellent<br>
+                                • Growth rate: Above average<br>
+                                • Disease resistance: Strong<br>
+                                • Stress indicators: Minimal
+                            </div>
+                        </div>
+                    `
                 }
+            };
+            
+            title.textContent = details[type].title;
+            body.innerHTML = details[type].content;
+            modal.classList.add('show');
+        }
+
+        // Handle alert clicks
+        function handleAlert(type) {
+            const actions = {
+                pest: () => {
+                    selectZone(2);
+                    document.getElementById('action-select').value = 'spray';
+                    updateDroneButton();
+                    showToast('Zone 2 selected for pest treatment', 'warning');
+                },
+                moisture: () => {
+                    selectZone(4);
+                    document.getElementById('action-select').value = 'irrigate';
+                    updateDroneButton();
+                    showToast('Zone 4 selected for irrigation', 'warning');
+                },
+                weather: () => {
+                    showToast('Weather alert acknowledged. Adjusting irrigation schedule.', 'info');
+                }
+            };
+            
+            actions[type]();
+        }
+
+        // Select zone functionality
+        function selectZone(zoneNumber) {
+            document.getElementById('zone-select').value = zoneNumber;
+            updateDroneButton();
+            
+            // Visual feedback for zone selection
+            const zones = document.querySelectorAll('.zone');
+            zones.forEach((zone, index) => {
+                zone.style.transform = index + 1 === zoneNumber ? 'scale(1.05)' : 'scale(1)';
             });
-        }, 2000);
-        
-        
+            
+            setTimeout(() => {
+                zones.forEach(zone => {
+                    zone.style.transform = 'scale(1)';
+                });
+            }, 1000);
+        }
+
+        // Update drone button text
+        function updateDroneButton() {
+            const zoneSelect = document.getElementById('zone-select');
+            const actionSelect = document.getElementById('action-select');
+            const droneBtn = document.getElementById('drone-btn');
+            const btnText = droneBtn.querySelector('span');
+            
+            const zone = zoneSelect.value;
+            const action = actionSelect.value;
+            const actionText = action.charAt(0).toUpperCase() + action.slice(1);
+            
+            btnText.textContent = `${actionText} Zone ${zone}`;
+        }
+
+        // Send drone functionality
+        function sendDrone() {
+            if (droneStatus !== 'available') {
+                showToast('Drone is currently busy. Please wait.', 'error');
+                return;
+            }
+            
+            const zoneSelect = document.getElementById('zone-select');
+            const actionSelect = document.getElementById('action-select');
+            const droneBtn = document.getElementById('drone-btn');
+            const statusText = document.getElementById('drone-status-text');
+            const statusIndicator = document.querySelector('.status-indicator');
+            
+            const zone = zoneSelect.value;
+            const action = actionSelect.value;
+            
+            // Update button to loading state
+            droneBtn.classList.add('btn-loading');
+            droneBtn.querySelector('span').textContent = 'Deploying Drone...';
+            droneBtn.disabled = true;
+            
+            // Update drone status
+            droneStatus = 'busy';
+            statusText.textContent = `Drone Status: ${action.charAt(0).toUpperCase() + action.slice(1)}ing Zone ${zone}`;
+            statusIndicator.style.background = '#f39c12';
+            statusIndicator.style.animation = 'pulse 0.5s infinite';
+            
+            // Simulate drone mission
+            currentMission = setTimeout(() => {
+                completeMission(zone, action);
+            }, 5000);
+            
+            showToast(`Drone deployed to Zone ${zone} for ${action}`, 'info');
+        }
+
+        // Complete drone mission
+        function completeMission(zone, action) {
+            const droneBtn = document.getElementById('drone-btn');
+            const statusText = document.getElementById('drone-status-text');
+            const statusIndicator = document.querySelector('.status-indicator');
+            
+            // Reset button
+            droneBtn.classList.remove('btn-loading');
+            droneBtn.disabled = false;
+            updateDroneButton();
+            
+            // Update drone status
+            droneStatus = 'available';
+            statusText.textContent = 'Drone Status: Available';
+            statusIndicator.style.background = '#2ecc71';
+            statusIndicator.style.animation = 'pulse 2s infinite';
+            
+            // Update transaction count
+            const transactionCount = document.getElementById('transaction-count');
+            const currentCount = parseInt(transactionCount.textContent.match(/\d+/)[0]);
+            transactionCount.textContent = `${currentCount + 1} recorded`;
+            
+            // Show completion message
+            showToast(`${action.charAt(0).toUpperCase() + action.slice(1)} completed in Zone ${zone}`, 'success');
+            
+            // Update zone status if it was a treatment
+            if (action === 'spray' && zone === '2') {
+                updateZoneStatus(2, 'Treating', 'status-warning');
+                setTimeout(() => {
+                    updateZoneStatus(2, 'Optimal', 'status-normal');
+                }, 10000);
+            }
+            
+            currentMission = null;
+        }
+
+        // Update zone status
+        function updateZoneStatus(zoneNumber, status, statusClass) {
+            const zones = document.querySelectorAll('.zone');
+            const targetZone = zones[zoneNumber - 1];
+            const statusElement = targetZone.querySelector('.zone-status');
+            
+            statusElement.textContent = status;
+            statusElement.className = `zone-status ${statusClass}`;
+        }
+
+        // Update treatment log
+        function updateTreatmentLog() {
+            const button = event.target;
+            const icon = button.querySelector('i');
+            
+            // Animate the sync icon
+            icon.style.animation = 'spin 2s linear';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                icon.style.animation = '';
+                button.disabled = false;
+                showToast('Treatment log updated successfully', 'success');
+            }, 2000);
+        }
+
+        // View treatment history
+        function viewTreatmentHistory() {
+            const modal = document.getElementById('detailModal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            
+            title.textContent = 'Treatment History';
+            body.innerHTML = `
+                <div style="max-height: 400px; overflow-y: auto;">
+                    <div style="background: rgba(46, 204, 113, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid #2ecc71;">
+                        <strong>Zone 2 - Pest Treatment</strong><br>
+                        <small>2 hours ago • Blockchain Hash: 0x7f9a8b2c...</small><br>
+                        Applied organic pesticide solution
+                    </div>
+                    <div style="background: rgba(52, 152, 219, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid #3498db;">
+                        <strong>Zone 4 - Irrigation</strong><br>
+                        <small>6 hours ago • Blockchain Hash: 0x4e6f2a1d...</small><br>
+                        Automated irrigation cycle - 45L water
+                    </div>
+                    <div style="background: rgba(243, 156, 18, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid #f39c12;">
+                        <strong>Zone 1 - Nutrient Application</strong><br>
+                        <small>1 day ago • Blockchain Hash: 0x9c3b8f7e...</small><br>
+                        Applied nitrogen-rich fertilizer
+                    </div>
+                    <div style="background: rgba(155, 89, 182, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid #9b59b6;">
+                        <strong>Zone 3 - Health Monitoring</strong><br>
+                        <small>2 days ago • Blockchain Hash: 0x2d8e5c9a...</small><br>
+                        Drone surveillance and health assessment
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.add('show');
+        }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('detailModal');
+            modal.classList.remove('show');
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Update real-time data
+        function updateRealTimeData() {
+            // Simulate real-time data updates
+            const moisture = Math.floor(Math.random() * 10) + 65;
+            const temperature = Math.floor(Math.random() * 6) + 22;
+            const health = Math.floor(Math.random() * 8) + 90;
+            
+            document.querySelector('.moisture .stat-value').textContent = moisture + '%';
+            document.querySelector('.temperature .stat-value').textContent = temperature + '°C';
+            document.querySelector('.health .stat-value').textContent = health + '%';
+            
+            // Add subtle animation to indicate data refresh
+            const statBoxes = document.querySelectorAll('.stat-box');
+            statBoxes.forEach(box => {
+                box.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    box.style.transform = 'scale(1)';
+                }, 200);
+            });
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+            if (event.ctrlKey && event.key === 'd') {
+                event.preventDefault();
+                sendDrone();
+            }
+        });
+
+        // Smooth scroll to sections
+        function smoothScrollTo(elementId) {
+            const element = document.getElementById(elementId);
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize tooltips and enhanced interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects for better user feedback
+            const interactiveElements = document.querySelectorAll('.stat-box, .zone, .alert, .card');
+            
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.transform = this.style.transform.includes('scale') ? 
+                        this.style.transform : 'translateY(-5px) scale(1.02)';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+        });
     </script>
 </body>
 </html>
