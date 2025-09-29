@@ -291,37 +291,7 @@
             text-shadow: 0 2px 10px rgba(46, 204, 113, 0.3);
         }
 
-        /* 3D Cube loader */
-        .cube-loader {
-            position: absolute;
-            top: -80px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 50px;
-            transform-style: preserve-3d;
-            animation: rotateCube 3s infinite ease-in-out;
-        }
 
-        @keyframes rotateCube {
-            0% { transform: translateX(-50%) rotateX(0deg) rotateY(0deg); }
-            100% { transform: translateX(-50%) rotateX(360deg) rotateY(360deg); }
-        }
-
-        .cube-face {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: rgba(46, 204, 113, 0.1);
-            border: 2px solid rgba(46, 204, 113, 0.4);
-        }
-
-        .cube-face.front { transform: translateZ(25px); }
-        .cube-face.back { transform: translateZ(-25px) rotateY(180deg); }
-        .cube-face.right { transform: rotateY(90deg) translateZ(25px); }
-        .cube-face.left { transform: rotateY(-90deg) translateZ(25px); }
-        .cube-face.top { transform: rotateX(90deg) translateZ(25px); }
-        .cube-face.bottom { transform: rotateX(-90deg) translateZ(25px); }
         
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -354,18 +324,9 @@
 </head>
 <body>
     <div class="grid-background"></div>
-    <div class="logo-container">
-            <div class="cube-loader">
-                <div class="cube-face front"></div>
-                <div class="cube-face back"></div>
-                <div class="cube-face right"></div>
-                <div class="cube-face left"></div>
-                <div class="cube-face top"></div>
-                <div class="cube-face bottom"></div>
-            </div>
     
     <div class="loading-container">
-        
+        <div class="logo-container">
             <svg class="logo-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300.000000 255.000000" preserveAspectRatio="xMidYMid meet">
                 <g transform="translate(0.000000,255.000000) scale(0.100000,-0.100000)" fill="#2ecc71" stroke="none">
                     <path d="M1285 2159 c-107 -7 -177 -36 -254 -105 -210 -189 -152 -557 108 -688 25 -13 184 -66 352 -119 168 -52 331 -107 362 -121 95 -45 147 -127 155 -242 8 -133 -36 -222 -139 -279 l-54 -30 -323 0 -324 0 -24 28 c-20 24 -24 39 -24 98 l0 70 -87 -3 -88 -3 -3 -90 c-2 -64 2 -102 13 -132 20 -51 81 -108 132 -123 26 -8 156 -10 413 -8 l375 3 65 31 c89 42 171 124 213 211 28 61 32 79 35 178 6 164 -26 246 -138 361 -70 71 -137 103 -339 164 -295 88 -454 141 -496 165 -88 51 -127 120 -127 224 0 80 19 128 72 181 66 66 95 70 471 70 393 0 371 7 379 -117 l5 -78 94 -3 93 -3 -3 113 c-5 130 -21 169 -92 216 l-40 27 -346 5 c-190 3 -386 2 -436 -1z"/>
